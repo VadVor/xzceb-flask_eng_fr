@@ -8,3 +8,4 @@ load_dotenv()
 
 apikey = os.environ['apikey']
 url = os.environ['url']
+print(url)
