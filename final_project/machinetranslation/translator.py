@@ -18,15 +18,28 @@ language_translator = LanguageTranslatorV3(
 
 language_translator.set_service_url(url)
 
-englishText='Hello, how are you today?'
+englishText_test = 'Hello, how are you today?'
+frenchText_test = 'Bonjour, comment vous êtes aujourd\'hui?'
 
 
 
-def englishToFrench(englishText):
+def englishToFrench(englishText_test):
     translation = language_translator.translate(
-    text=englishText,
+    text = englishText_test,
     model_id='en-fr').get_result()
-    print(json.dumps(translation, indent=2, ensure_ascii=False))
-    #return frenchText
+    json_string=json.dumps(translation, ensure_ascii=False)
+    parse_string = json.loads(json_string)
+    frenchText = parse_string['translations'][0]['translation']
+    return frenchText
 
-englishToFrench(englishText)
+def frenchToEnglish(frenchText_test):
+    translation = language_translator.translate(
+    text = frenchText_test,
+    model_id='fr-en').get_result()
+    json_string=json.dumps(translation, ensure_ascii=False)
+    parse_string = json.loads(json_string)
+    englishText = parse_string['translations'][0]['translation']
+    return englishText
+
+print(englishToFrench(englishText_test))
+print(frenchToEnglish(frenchText_test))
